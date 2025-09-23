@@ -139,15 +139,20 @@ export function ListPropertyForm({ onSuccess, editProperty }: { onSuccess?: () =
       if (onSuccess) {
         onSuccess()
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Error listing property:", error)
       
       // Show more specific error message
       let errorMessage = "Failed to list property. Please try again."
-      if (error?.message?.includes("index")) {
-        errorMessage = "Database configuration issue. Property saved but display may be delayed."
-      } else if (error?.message?.includes("CORS")) {
-        errorMessage = "Image upload issue. Property saved but images may not display correctly."
+      
+      if (error instanceof Error) {
+        if (error.message.includes("index")) {
+          errorMessage = "Database configuration issue. Property saved but display may be delayed."
+        } else if (error.message.includes("CORS")) {
+          errorMessage = "Image upload issue. Property saved but images may not display correctly."
+        } else {
+          errorMessage = error.message
+        }
       }
       
       toast.error(errorMessage)

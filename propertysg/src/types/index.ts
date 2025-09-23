@@ -1,3 +1,5 @@
+import { FieldValue } from 'firebase/firestore';
+
 export interface Property {
   id?: string;
   title: string;
@@ -30,8 +32,8 @@ export interface Property {
   featured: boolean;
   status: 'available' | 'sold' | 'rented' | 'pending';
   views: number;
-  createdAt: any;
-  updatedAt: any;
+  createdAt: Date | FieldValue;
+  updatedAt: Date | FieldValue;
 }
 
 export interface User {

@@ -11,7 +11,8 @@ import {
   orderBy, 
   limit,
   serverTimestamp,
-  DocumentData 
+  DocumentData,
+  FieldValue 
 } from 'firebase/firestore';
 import { db } from './firebase';
 import { Property } from '@/types';
@@ -251,8 +252,8 @@ class PropertyService {
       
       // Sort in memory instead of in query
       return properties.sort((a, b) => {
-        const dateA = a.createdAt instanceof Date ? a.createdAt : new Date(a.createdAt);
-        const dateB = b.createdAt instanceof Date ? b.createdAt : new Date(b.createdAt);
+        const dateA = a.createdAt instanceof Date ? a.createdAt : new Date();
+        const dateB = b.createdAt instanceof Date ? b.createdAt : new Date();
         return dateB.getTime() - dateA.getTime();
       });
     } catch (error) {
@@ -314,8 +315,8 @@ class PropertyService {
       
       // Sort in memory instead of in query
       return properties.sort((a, b) => {
-        const dateA = a.createdAt instanceof Date ? a.createdAt : new Date(a.createdAt);
-        const dateB = b.createdAt instanceof Date ? b.createdAt : new Date(b.createdAt);
+        const dateA = a.createdAt instanceof Date ? a.createdAt : new Date();
+        const dateB = b.createdAt instanceof Date ? b.createdAt : new Date();
         return dateB.getTime() - dateA.getTime();
       });
     } catch (error) {

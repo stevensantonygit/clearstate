@@ -46,11 +46,12 @@ export function PropertyListings() {
       const userProperties = await propertyService.getUserProperties(user.uid)
       console.log("Fetched properties:", userProperties)
       setProperties(userProperties)
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Error fetching properties:", error)
       
       // More specific error handling
-      if (error?.message?.includes("index")) {
+      const errorMessage = error instanceof Error ? error.message : 'Failed to fetch properties'
+      if (errorMessage.includes("index")) {
         toast.error("Loading properties... Database is being configured.")
         // Still try to show properties, they might exist
       } else {
@@ -90,9 +91,10 @@ export function PropertyListings() {
       await propertyService.deleteProperty(property.id!, user.uid)
       toast.success("Property deleted successfully!")
       fetchUserProperties() // Refresh the list
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Error deleting property:", error)
-      toast.error(error?.message || "Failed to delete property")
+      const errorMessage = error instanceof Error ? error.message : 'Failed to delete property'
+      toast.error(errorMessage)
     }
   }
 

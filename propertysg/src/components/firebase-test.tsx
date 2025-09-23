@@ -59,9 +59,10 @@ export function FirebaseTest() {
         console.log('User properties:', userProperties)
       }
       
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Firebase test error:', error)
-      toast.error(`Firebase test failed: ${error?.message || 'Unknown error'}`)
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error'
+      toast.error(`Firebase test failed: ${errorMessage}`)
     } finally {
       setTesting(false)
     }

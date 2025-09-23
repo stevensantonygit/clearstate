@@ -274,7 +274,9 @@ export default function PropertiesPage() {
         case "price-desc":
           return b.price - a.price
         case "newest":
-          return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+          const aTime = a.createdAt instanceof Date ? a.createdAt.getTime() : 0
+          const bTime = b.createdAt instanceof Date ? b.createdAt.getTime() : 0
+          return bTime - aTime
         case "views":
           return b.views - a.views
         default:
