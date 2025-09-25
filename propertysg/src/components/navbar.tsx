@@ -101,8 +101,8 @@ export function Navbar() {
                 </NavigationMenuItem>
                 <NavigationMenuItem>
                   <NavigationMenuLink asChild>
-                    <Link href="/agents" className={cn(navigationMenuTriggerStyle(), "bg-transparent text-white/80 hover:text-white hover:bg-white/10")}>
-                      Agents
+                    <Link href="/ai-agent" className={cn(navigationMenuTriggerStyle(), "bg-transparent text-white/80 hover:text-white hover:bg-white/10")}>
+                      AI Agent
                     </Link>
                   </NavigationMenuLink>
                 </NavigationMenuItem>
