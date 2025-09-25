@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { Property } from "@/types"
+import { propertyService } from "@/lib/property-service"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -43,22 +44,92 @@ const amenityIcons: { [key: string]: React.ComponentType<{ className?: string }>
 }
 
 interface Props {
-  property: Property
+  propertyId: string
 }
 
-export default function PropertyDetailsClient({ property }: Props) {
+export default function PropertyDetailsClient({ propertyId }: Props) {
+  const [property, setProperty] = useState<Property | null>(null)
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [isFavorited, setIsFavorited] = useState(false)
 
   useEffect(() => {
-    setLoading(false)
-  }, [])
+    const fetchProperty = async () => {
+      try {
+        setLoading(true)
+        setError(null)
+        
+        console.log('PropertyDetailsClient: Fetching property with ID:', propertyId)
+        
+        // Fetch all properties and find the one with matching ID
+        const properties = await propertyService.getAllProperties()
+        console.log('PropertyDetailsClient: All properties:', properties)
+        
+        const foundProperty = properties.find(p => p.id === propertyId)
+        console.log('PropertyDetailsClient: Found property:', foundProperty)
+        
+        if (foundProperty) {
+          setProperty(foundProperty)
+        } else {
+          setError(`Property with ID ${propertyId} not found`)
+        }
+      } catch (err) {
+        console.error('PropertyDetailsClient: Error fetching property:', err)
+        setError('Failed to fetch property')
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchProperty()
+  }, [propertyId])
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary"></div>
+      <div className="container px-4 py-8 md:px-6">
+        <div className="flex items-center justify-center min-h-[400px]">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary mx-auto"></div>
+            <p className="mt-4 text-muted-foreground">Loading property details...</p>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div className="container px-4 py-8 md:px-6">
+        <div className="text-center py-12">
+          <h1 className="text-2xl font-bold mb-4 text-red-600">Error</h1>
+          <p className="text-muted-foreground mb-6">{error}</p>
+          <Button asChild>
+            <Link href="/properties">
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Back to Properties
+            </Link>
+          </Button>
+        </div>
+      </div>
+    )
+  }
+
+  if (!property) {
+    return (
+      <div className="container px-4 py-8 md:px-6">
+        <div className="text-center py-12">
+          <h1 className="text-2xl font-bold mb-4">Property Not Found</h1>
+          <p className="text-muted-foreground mb-6">
+            The property you&apos;re looking for doesn&apos;t exist or has been removed.
+          </p>
+          <Button asChild>
+            <Link href="/properties">
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Back to Properties
+            </Link>
+          </Button>
+        </div>
       </div>
     )
   }

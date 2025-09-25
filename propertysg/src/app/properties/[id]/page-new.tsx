@@ -53,7 +53,6 @@ interface Props {
 }
 
 export default function PropertyDetailsPage({ params }: Props) {
-  // In a real app, you would fetch the property data based on params.id
-  // For now, we'll use the mock data
-  return <PropertyDetailsClient property={mockProperty} />
+  // Pass the propertyId to the client component
+  return <PropertyDetailsClient propertyId={params.id} />
 }

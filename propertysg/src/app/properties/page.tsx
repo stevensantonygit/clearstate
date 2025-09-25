@@ -223,20 +223,28 @@ export default function PropertiesPage() {
   const [filteredProperties, setFilteredProperties] = useState<Property[]>([])
   const [loading, setLoading] = useState(true)
   const [searchQuery, setSearchQuery] = useState("")
-  const [selectedType, setSelectedType] = useState("")
+  const [selectedType, setSelectedType] = useState("all")
   const [priceRange, setPriceRange] = useState([0, 5000000])
-  const [bedrooms, setBedrooms] = useState("")
+  const [bedrooms, setBedrooms] = useState("any")
   const [sortBy, setSortBy] = useState("price-asc")
 
   useEffect(() => {
-    // Simulate loading properties
-    const timer = setTimeout(() => {
-      setProperties(mockProperties)
-      setFilteredProperties(mockProperties)
-      setLoading(false)
-    }, 1000)
+    const fetchProperties = async () => {
+      try {
+        setLoading(true)
+        const allProperties = await propertyService.getAllProperties()
+        setProperties(allProperties)
+        setFilteredProperties(allProperties)
+      } catch (error) {
+        console.error("Error fetching properties:", error)
+        setProperties([])
+        setFilteredProperties([])
+      } finally {
+        setLoading(false)
+      }
+    }
 
-    return () => clearTimeout(timer)
+    fetchProperties()
   }, [])
 
   useEffect(() => {
@@ -252,7 +260,7 @@ export default function PropertiesPage() {
     }
 
     // Filter by property type
-    if (selectedType) {
+    if (selectedType && selectedType !== "all") {
       filtered = filtered.filter(property => property.propertyType === selectedType)
     }
 
@@ -262,7 +270,7 @@ export default function PropertiesPage() {
     )
 
     // Filter by bedrooms
-    if (bedrooms) {
+    if (bedrooms && bedrooms !== "any") {
       filtered = filtered.filter(property => property.bedrooms === parseInt(bedrooms))
     }
 
@@ -289,9 +297,9 @@ export default function PropertiesPage() {
 
   const handleClearFilters = () => {
     setSearchQuery("")
-    setSelectedType("")
+    setSelectedType("all")
     setPriceRange([0, 5000000])
-    setBedrooms("")
+    setBedrooms("any")
     setSortBy("price-asc")
   }
 
@@ -318,7 +326,7 @@ export default function PropertiesPage() {
             <SelectValue placeholder="All Types" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="">All Types</SelectItem>
+            <SelectItem value="all">All Types</SelectItem>
             <SelectItem value="hdb">HDB</SelectItem>
             <SelectItem value="condo">Condo</SelectItem>
             <SelectItem value="landed">Landed</SelectItem>
@@ -352,7 +360,7 @@ export default function PropertiesPage() {
             <SelectValue placeholder="Any" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="">Any</SelectItem>
+            <SelectItem value="any">Any</SelectItem>
             <SelectItem value="1">1 Bedroom</SelectItem>
             <SelectItem value="2">2 Bedrooms</SelectItem>
             <SelectItem value="3">3 Bedrooms</SelectItem>

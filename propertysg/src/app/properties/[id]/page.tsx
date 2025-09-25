@@ -1,5 +1,29 @@
 import { Property } from "@/types"
+import { propertyService } from "@/lib/property-service"
 import PropertyDetailsClient from "@/components/property-details-client"
+
+// Generate static params for build - this is required for static export
+export async function generateStaticParams() {
+  try {
+    // Try to get actual property IDs from Firebase
+    const properties = await propertyService.getAllProperties()
+    if (properties.length > 0) {
+      return properties.map((property) => ({
+        id: property.id,
+      }))
+    }
+  } catch (error) {
+    console.log("Could not fetch properties for static generation, using fallback IDs")
+  }
+  
+  // Fallback to some default IDs
+  return [
+    { id: '1' },
+    { id: '2' }, 
+    { id: '3' },
+    { id: 'default' }
+  ]
+}
 
 // Mock property data - this would come from your API/database
 const mockProperty: Property = {
@@ -39,21 +63,12 @@ const mockProperty: Property = {
   views: 245
 }
 
-// Generate static params for build
-export async function generateStaticParams() {
-  return [
-    { id: '1' },
-    { id: '2' }, 
-    { id: '3' }
-  ]
-}
-
 interface Props {
   params: { id: string }
 }
 
 export default function PropertyDetailsPage({ params }: Props) {
-  // In a real app, you would fetch the property data based on params.id
-  // For now, we'll use the mock data
-  return <PropertyDetailsClient property={mockProperty} />
+  // For static export, we'll pass the ID to the client component
+  // which will handle the Firebase fetching
+  return <PropertyDetailsClient propertyId={params.id} />
 }

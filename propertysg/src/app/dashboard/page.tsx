@@ -7,6 +7,7 @@ import { PropertyListings } from "@/components/property-listings"
 import { ProfileSection } from "@/components/profile-section"
 import { SectionCards } from "@/components/section-cards"
 import { SiteHeader } from "@/components/site-header"
+import { AllProperties } from "@/components/all-properties"
 import {
   SidebarInset,
   SidebarProvider,
@@ -21,6 +22,8 @@ export default function Page() {
         return <ProfileSection />
       case "properties":
         return <PropertyListings />
+      case "all-properties":
+        return <AllProperties />
       case "dashboard":
       default:
         return (

@@ -230,16 +230,20 @@ class PropertyService {
   // Get all properties (public view)
   async getAllProperties(): Promise<Property[]> {
     try {
+      console.log("🔥 PropertyService: Starting getAllProperties...")
       // Use simple query without orderBy to avoid composite index requirement
       const q = query(
         collection(db, this.collectionName),
         where('status', '==', 'available')
       );
       
+      console.log("🔥 PropertyService: Executing Firestore query...")
       const querySnapshot = await getDocs(q);
+      console.log("🔥 PropertyService: Query completed. Docs found:", querySnapshot.size)
       const properties: Property[] = [];
       
       querySnapshot.forEach((doc) => {
+        console.log("🔥 PropertyService: Processing doc:", doc.id, doc.data())
         const data = doc.data();
         properties.push({
           id: doc.id,
@@ -250,6 +254,7 @@ class PropertyService {
         } as Property);
       });
       
+      console.log("🔥 PropertyService: Final properties array:", properties)
       // Sort in memory instead of in query
       return properties.sort((a, b) => {
         const dateA = a.createdAt instanceof Date ? a.createdAt : new Date();
@@ -257,7 +262,7 @@ class PropertyService {
         return dateB.getTime() - dateA.getTime();
       });
     } catch (error) {
-      console.error('Error fetching properties:', error);
+      console.error('❌ PropertyService Error fetching properties:', error);
       throw error;
     }
   }

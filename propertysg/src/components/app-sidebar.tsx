@@ -42,9 +42,14 @@ const data = {
       icon: IconDashboard,
     },
     {
-      title: "Properties",
-      section: "properties",
+      title: "All Properties",
+      section: "all-properties",
       icon: IconBuilding,
+    },
+    {
+      title: "My Properties",
+      section: "properties",
+      icon: IconHome,
     },
     {
       title: "Analytics",
