@@ -72,15 +72,30 @@ export function Navbar() {
                           </Link>
                         </NavigationMenuLink>
                       </li>
-                      <ListItem href="/properties/hdb" title="HDB Flats" className="text-white hover:bg-white/10">
-                        Public housing options across Singapore
-                      </ListItem>
-                      <ListItem href="/properties/condo" title="Condominiums" className="text-white hover:bg-white/10">
-                        Private condominium developments
-                      </ListItem>
-                      <ListItem href="/properties/landed" title="Landed Properties" className="text-white hover:bg-white/10">
-                        Houses, bungalows and terrace homes
-                      </ListItem>
+                      <li>
+                        <div className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none text-white cursor-default">
+                          <div className="text-sm font-medium leading-none">HDB Flats</div>
+                          <p className="line-clamp-2 text-sm leading-snug text-white/70">
+                            Public housing options across Singapore
+                          </p>
+                        </div>
+                      </li>
+                      <li>
+                        <div className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none text-white cursor-default">
+                          <div className="text-sm font-medium leading-none">Condominiums</div>
+                          <p className="line-clamp-2 text-sm leading-snug text-white/70">
+                            Private condominium developments
+                          </p>
+                        </div>
+                      </li>
+                      <li>
+                        <div className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none text-white cursor-default">
+                          <div className="text-sm font-medium leading-none">Landed Properties</div>
+                          <p className="line-clamp-2 text-sm leading-snug text-white/70">
+                            Houses, bungalows and terrace homes
+                          </p>
+                        </div>
+                      </li>
                     </ul>
                   </NavigationMenuContent>
                 </NavigationMenuItem>

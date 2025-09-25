@@ -16,18 +16,18 @@ export function Footer() {
               Singapore&apos;s premier property listing platform. Find your dream home with ease.
             </p>
             <div className="flex space-x-4">
-              <Link href="#" className="text-muted-foreground hover:text-primary">
+              <div className="text-muted-foreground cursor-default">
                 <Facebook className="h-5 w-5" />
-              </Link>
-              <Link href="#" className="text-muted-foreground hover:text-primary">
+              </div>
+              <div className="text-muted-foreground cursor-default">
                 <Twitter className="h-5 w-5" />
-              </Link>
-              <Link href="#" className="text-muted-foreground hover:text-primary">
+              </div>
+              <div className="text-muted-foreground cursor-default">
                 <Instagram className="h-5 w-5" />
-              </Link>
-              <Link href="#" className="text-muted-foreground hover:text-primary">
+              </div>
+              <div className="text-muted-foreground cursor-default">
                 <Linkedin className="h-5 w-5" />
-              </Link>
+              </div>
             </div>
           </div>
 
@@ -35,18 +35,18 @@ export function Footer() {
           <div className="space-y-4">
             <h3 className="text-lg font-semibold">Quick Links</h3>
             <nav className="flex flex-col space-y-2 text-sm">
-              <Link href="/properties" className="text-muted-foreground hover:text-primary">
+              <span className="text-muted-foreground cursor-default">
                 Browse Properties
-              </Link>
-              <Link href="/agents" className="text-muted-foreground hover:text-primary">
+              </span>
+              <span className="text-muted-foreground cursor-default">
                 Find Agents
-              </Link>
-              <Link href="/list-property" className="text-muted-foreground hover:text-primary">
+              </span>
+              <span className="text-muted-foreground cursor-default">
                 List Your Property
-              </Link>
-              <Link href="/mortgage-calculator" className="text-muted-foreground hover:text-primary">
+              </span>
+              <span className="text-muted-foreground cursor-default">
                 Mortgage Calculator
-              </Link>
+              </span>
             </nav>
           </div>
 
@@ -54,18 +54,18 @@ export function Footer() {
           <div className="space-y-4">
             <h3 className="text-lg font-semibold">Property Types</h3>
             <nav className="flex flex-col space-y-2 text-sm">
-              <Link href="/properties?type=hdb" className="text-muted-foreground hover:text-primary">
+              <span className="text-muted-foreground cursor-default">
                 HDB Flats
-              </Link>
-              <Link href="/properties?type=condo" className="text-muted-foreground hover:text-primary">
+              </span>
+              <span className="text-muted-foreground cursor-default">
                 Condominiums
-              </Link>
-              <Link href="/properties?type=landed" className="text-muted-foreground hover:text-primary">
+              </span>
+              <span className="text-muted-foreground cursor-default">
                 Landed Properties
-              </Link>
-              <Link href="/properties?type=commercial" className="text-muted-foreground hover:text-primary">
+              </span>
+              <span className="text-muted-foreground cursor-default">
                 Commercial
-              </Link>
+              </span>
             </nav>
           </div>
 
