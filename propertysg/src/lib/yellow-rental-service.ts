@@ -251,14 +251,15 @@ class YellowRentalService {
       const mockContract: RentalContract = {
         id: contractId,
         propertyId: 'property-123',
-        landlord: '0x...',
-        tenant: '0x...',
-        monthlyRent: '1000',
-        securityDeposit: '2000',
-        leaseDuration: 365 * 24 * 60 * 60,
+        landlordAddress: '0x742d35Cc6635C0532925a3b8D51d13f9a0b8A2a9',
+        tenantAddress: '0x123456789abcdef123456789abcdef1234567890',
+        monthlyRent: 1000,
+        securityDeposit: 2000,
+        leaseDuration: 12, // in months as per interface
         contractTerms: 'Standard rental terms',
         status: 'signed' as const,
         createdAt: new Date(),
+        updatedAt: new Date(),
         startDate: new Date(),
         endDate: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000),
       };
