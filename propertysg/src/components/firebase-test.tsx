@@ -25,6 +25,7 @@ export function FirebaseTest() {
           description: 'This is a test property',
           price: '500000',
           propertyType: 'hdb',
+          listingType: 'sale',
           bedrooms: '3',
           bathrooms: '2',
           area: '1000',

@@ -6,6 +6,7 @@ export interface Property {
   description: string;
   price: number;
   propertyType: 'hdb' | 'condo' | 'landed' | 'commercial';
+  listingType: 'sale' | 'rent';
   bedrooms: number;
   bathrooms: number;
   area: number;
@@ -63,4 +64,33 @@ export interface SearchFilters {
     max: number;
   };
   amenities?: string[];
+}
+
+export interface RentalContract {
+  id: string;
+  propertyId: string;
+  landlordAddress: string;
+  tenantAddress: string;
+  monthlyRent: number;
+  securityDeposit: number;
+  leaseDuration: number; // in months
+  startDate: Date;
+  endDate: Date;
+  contractTerms: string;
+  status: 'pending' | 'signed' | 'active' | 'expired' | 'terminated';
+  transactionHash?: string;
+  contractAddress?: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface SmartContractParams {
+  propertyId: string;
+  landlord: string;
+  tenant: string;
+  tenantAddress: string; // Alias for tenant for backward compatibility
+  monthlyRent: string; // in wei
+  securityDeposit: string; // in wei
+  leaseDuration: number; // in seconds
+  contractTerms: string;
 }

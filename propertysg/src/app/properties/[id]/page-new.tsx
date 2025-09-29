@@ -7,6 +7,7 @@ const mockProperty: Property = {
   title: "Luxury 3-Bedroom Condo at Marina Bay",
   description: "Experience luxury living in this stunning 3-bedroom condominium located in the heart of Marina Bay. This modern unit features floor-to-ceiling windows with breathtaking city and marina views, premium finishes throughout, and access to world-class amenities. The open-concept living and dining area is perfect for entertaining, while the master bedroom includes an en-suite bathroom and walk-in closet. Located in a prime location with easy access to shopping, dining, and public transportation.",
   propertyType: "condo",
+  listingType: "sale",
   price: 2800000,
   bedrooms: 3,
   bathrooms: 2,

@@ -28,6 +28,7 @@ const mockProperties: Property[] = [
       postalCode: "310123"
     },
     propertyType: "hdb",
+    listingType: "sale",
     bedrooms: 3,
     bathrooms: 2,
     area: 1000,
@@ -61,6 +62,7 @@ const mockProperties: Property[] = [
       postalCode: "018980"
     },
     propertyType: "condo",
+    listingType: "sale",
     bedrooms: 4,
     bathrooms: 3,
     area: 1500,
@@ -94,6 +96,7 @@ const mockProperties: Property[] = [
       postalCode: "259756"
     },
     propertyType: "landed",
+    listingType: "sale",
     bedrooms: 5,
     bathrooms: 4,
     area: 2200,
@@ -128,6 +131,7 @@ const mockProperties: Property[] = [
       postalCode: "238875"
     },
     propertyType: "condo",
+    listingType: "sale",
     bedrooms: 2,
     bathrooms: 2,
     area: 850,
@@ -161,6 +165,7 @@ const mockProperties: Property[] = [
       postalCode: "640456"
     },
     propertyType: "hdb",
+    listingType: "sale",
     bedrooms: 3,
     bathrooms: 2,
     area: 950,
@@ -194,6 +199,7 @@ const mockProperties: Property[] = [
       postalCode: "821308"
     },
     propertyType: "condo",
+    listingType: "sale",
     bedrooms: 4,
     bathrooms: 3,
     area: 1200,

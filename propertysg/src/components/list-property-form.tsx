@@ -22,6 +22,7 @@ const propertyFormSchema = z.object({
   description: z.string().min(50, "Description must be at least 50 characters"),
   price: z.string().min(1, "Price is required"),
   propertyType: z.string().min(1, "Property type is required"),
+  listingType: z.string().min(1, "Listing type is required"),
   bedrooms: z.string().min(1, "Number of bedrooms is required"),
   bathrooms: z.string().min(1, "Number of bathrooms is required"),
   area: z.string().min(1, "Area is required"),
@@ -59,6 +60,7 @@ export function ListPropertyForm({ onSuccess, editProperty }: { onSuccess?: () =
       description: editProperty?.description || "",
       price: editProperty?.price?.toString() || "",
       propertyType: editProperty?.propertyType || "",
+      listingType: editProperty?.listingType || "sale",
       bedrooms: editProperty?.bedrooms?.toString() || "",
       bathrooms: editProperty?.bathrooms?.toString() || "",
       area: editProperty?.area?.toString() || "",
@@ -213,7 +215,7 @@ export function ListPropertyForm({ onSuccess, editProperty }: { onSuccess?: () =
                   )}
                 />
 
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
                   <FormField
                     control={form.control}
                     name="propertyType"
@@ -231,6 +233,28 @@ export function ListPropertyForm({ onSuccess, editProperty }: { onSuccess?: () =
                             <SelectItem value="condo">Condominium</SelectItem>
                             <SelectItem value="landed">Landed Property</SelectItem>
                             <SelectItem value="commercial">Commercial</SelectItem>
+                          </SelectContent>
+                        </Select>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="listingType"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Listing Type *</FormLabel>
+                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                          <FormControl>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Sale or Rent" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            <SelectItem value="sale">For Sale</SelectItem>
+                            <SelectItem value="rent">For Rent</SelectItem>
                           </SelectContent>
                         </Select>
                         <FormMessage />

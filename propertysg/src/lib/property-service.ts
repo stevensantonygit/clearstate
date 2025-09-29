@@ -22,6 +22,7 @@ export interface PropertyFormData {
   description: string;
   price: string;
   propertyType: string;
+  listingType: string;
   bedrooms: string;
   bathrooms: string;
   area: string;
@@ -95,6 +96,7 @@ class PropertyService {
         description: formData.description,
         price: parseFloat(formData.price),
         propertyType: formData.propertyType as Property['propertyType'],
+        listingType: formData.listingType as Property['listingType'],
         bedrooms: parseInt(formData.bedrooms),
         bathrooms: parseInt(formData.bathrooms),
         area: parseInt(formData.area),

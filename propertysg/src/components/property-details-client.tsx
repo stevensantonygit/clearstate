@@ -27,7 +27,8 @@ import {
   Dumbbell,
   Waves,
   Shield,
-  TreePine
+  TreePine,
+  FileText
 } from "lucide-react"
 
 const amenityIcons: { [key: string]: React.ComponentType<{ className?: string }> } = {
@@ -328,6 +329,14 @@ export default function PropertyDetailsClient({ propertyId }: Props) {
                     <MessageSquare className="h-4 w-4 mr-2" />
                     Send Message
                   </Button>
+                  {property.listingType === 'rent' && (
+                    <Button variant="secondary" className="w-full" asChild>
+                      <Link href={`/create-contract?propertyId=${property.id}`}>
+                        <FileText className="h-4 w-4 mr-2" />
+                        Create Smart Contract
+                      </Link>
+                    </Button>
+                  )}
                 </div>
               </CardContent>
             </Card>
